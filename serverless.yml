@@ -1,0 +1,59 @@
+service: add-to-cart
+frameworkVersion: '3'
+useDotenv: true
+# custom:
+#   tableName: 'user_registration-${sls:stage}'
+
+provider:
+  name: aws
+  endpointType: REGIONAL
+  runtime: nodejs18.x
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - Fn::GetAtt: [ UsersTable, Arn ]
+  environment:
+    CART_TABLE: ${env:CART_TABLE}
+
+package: 
+  patterns:
+    - '!./node_modules/**'
+
+functions:
+  api:
+    handler: index.handler
+    layers:
+      - ${env:COMMON_LIB_ARN_NODEJS}
+    events:
+      - http: 
+          path: /api/cart/add
+          method: post
+
+resources:
+  Resources:
+    UsersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+          - AttributeName: productId   # Add the attribute definition for productId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+          - AttributeName: productId  # Add productId as the sort key
+            KeyType: RANGE 
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${env:CART_TABLE}
+plugins:
+  - serverless-offline
