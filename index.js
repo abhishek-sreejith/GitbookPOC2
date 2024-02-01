@@ -1,3 +1,4 @@
+// Adding a comment in the code
 const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
 const {
   DynamoDBDocumentClient,
