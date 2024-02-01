@@ -1,0 +1,275 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "User Registration API",
+      "description": "API endpoint for user registration on the e-commerce website.",
+      "version": "1.0.0"
+      
+    },
+    "tags": [
+      {
+        "name": "User Registration",
+        "description": "APIs for user registration on the e-commerce website"
+      },
+      {
+        "name": "Product Management",
+        "description": "APIs for product management on the e-commerce website"
+      }
+    ],
+    "paths": {
+      "/api/register": {
+        "post": {
+          "tags": ["User Registration"],
+          "summary": "Create a user account",
+          "requestBody": {
+            "description": "User registration data",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "string",
+                      "description": "User's full name"
+                    },
+                    "Email": {
+                      "type": "string",
+                      "description": "User's email address"
+                    },
+                    "Password": {
+                      "type": "string",
+                      "description": "User's password for account security"
+                    },
+                    "Shipping Address": {
+                      "type": "string",
+                      "description": "User's shipping address"
+                    }
+                  },
+                  "required": ["Name", "Email", "Password", "Shipping Address"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "User registration successful",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      },
+                      "userId": {
+                        "type": "string"
+                      },
+                      "registrationDate": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    },
+                    "required": ["message", "userId", "registrationDate"]
+                  },
+                  "example": {
+                    "message": "User registration successful",
+                    "userId": "123456",
+                    "registrationDate": "2024-01-03T12:00:00Z"
+                  }
+                }
+              }
+            },
+            "403": {
+              "description": "Forbidden",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["message"]
+                  },
+                  "example": {
+                    "message": "You do not have access to perform this API action"
+                  }
+                }
+              }
+            },
+            "409": {
+                "description": "User already exists",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["message"]
+                    },
+                    "example": {
+                      "message": "User with same email id already exists"
+                    }
+                  }
+                }
+              },
+            "500": {
+              "description": "Internal Server Error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string"
+                      }
+                    },
+                    "required": ["message"]
+                  },
+                  "example": {
+                    "message": "Internal server error"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/products":{
+        "get":{
+            "tags":["Product Management"],
+            "summary": "Search for a product",
+            "requestBody":{
+                "description": "Product search data",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "keywords": {
+                      "type": "string",
+                      "description": "Keywords for the search"
+                    },
+                    "category": {
+                      "type": "string",
+                      "description": "Category of the product search"
+                    },
+                    "subcategory": {
+                      "type": "string",
+                      "description": "Subcategory for the product search"
+                    },
+                    "min_price": {
+                      "type": "number",
+                      "format": "decimal",
+                      "description": "Minimium price of the products to be searched"
+                    },
+                    "max_price":{
+                        "type": "number",
+                        "format": "decimal",
+                        "description": "Maximium price of the products to be searched"
+                    }
+                  },
+                  "required": ["Keywords"]
+                }
+              }
+            }
+
+            },
+            "responses": {
+                "200": {
+                    "description": "Product search successful",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "object",
+                          "properties": {
+                            "product_id": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "example": {
+                          "product_id": "123456"
+                        }
+                      }
+                    }
+                  },
+                  "404": {
+                    "description": "Item not found",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "object",
+                          "properties": {
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": ["message"]
+                        },
+                        "example": {
+                          "message": "Product does not exist."
+                        }
+                      }
+                    }
+                  },
+                  "400": {
+                    "description": "Bad Request",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "object",
+                          "properties": {
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": ["message"]
+                        },
+                        "example": {
+                          "message": "The price range entered is invalid."
+                        }
+                      }
+                    }
+                  },
+                  "500": {
+                    "description": "Internal Server Error",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "type": "object",
+                          "properties": {
+                            "message": {
+                              "type": "string"
+                            }
+                          },
+                          "required": ["message"]
+                        },
+                        "example": {
+                          "message": "Internal server error"
+                        }
+                      }
+                    }
+                  }
+            }
+        }
+      }
+    },
+    "components": {
+      "securitySchemes": {
+        "BearerAuth": {
+          "type": "apiKey",
+          "name": "Authorization",
+          "in": "header",
+          "description": "Bearer Token"
+        }
+      }
+    }
+  }
+  
