@@ -1,7 +1,5 @@
 # Serverless Framework Node Express API on AWS
 
-##
-
 This template demonstrates how to develop and deploy a simple Node Express API service, backed by DynamoDB database, running on AWS Lambda using the traditional Serverless Framework.
 
 ### Anatomy of the template
