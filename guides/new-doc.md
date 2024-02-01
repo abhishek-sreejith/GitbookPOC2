@@ -1,3 +1,3 @@
 # new doc
 
-Some editd files
+Some edited text from gitbook
