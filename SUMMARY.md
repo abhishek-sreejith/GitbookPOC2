@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Serverless](README.md)
+* [Serverless Framework Node Express API on AWS](README.md)
 * [Guides](Guides/README.md)
   * [Contact Us](Guides/ContactUs.md)
   * [Frequently Asked Questions](Guides/FAQ.md)
