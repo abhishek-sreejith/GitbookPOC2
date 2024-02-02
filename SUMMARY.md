@@ -11,7 +11,7 @@
   * [Frequently Asked Questions](Guides/FAQ.md)
   * [new doc](guides/new-doc.md)
   * [Cart-Management APIs](guides/cart-management-apis.md)
-  * [Api-documentation](Guides/apidocs.html)
+  * [Api-docs](Guides/apidocs.html)
   * [API-Documentation](guides/api-documentation/README.md)
     * [About](guides/api-documentation/about.md)
     * [API reference](guides/api-documentation/api-reference/README.md)
