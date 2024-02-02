@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart-Management APIs</title>
+</head>
+<body>
+    <h1>Cart-Management APIs</h1>
+    <p>APIs to manage the buyer cart</p>
+    <p>Version: 1.0.0</p>
+    <h2>Server</h2>
+    <ul>
+        <li>URL: <a href="https://apis.indyauction.net/dev/v1/cart-management">https://apis.indyauction.net/dev/v1/cart-management</a></li>
+    </ul>
+    <h2>Tags</h2>
+    <ul>
+        <li>Name: Cart Management</li>
+        <li>Description: APIs to manage the Buyer Cart</li>
+    </ul>
+    <h2>Paths</h2>
+    <h3>/cart</h3>
+    <h4>GET</h4>
+    <ul>
+        <li>Summary: listing the all lots in the cart</li>
+        <li>Parameters:
+            <ul>
+                <li>Name: auction_id</li>
+                <li>In: query</li>
+                <li>Description: Fetch details for the provided auction id</li>
+                <li>Schema: string</li>
+                <li>Example: 65169eee25d90f9a92c12876</li>
+            </ul>
+        </li>
+        <li>Responses:
+            <ul>
+                <li>200 - listing successful
+                    <ul>
+                        <li>Content:
+                            <ul>
+                                <li>application/json:
+                                    <ul>
+                                        <li>Example:
+                                            <pre>
+{
+    "data": [
+        {
+            "_id": "655c57e0c0ab0e2b81e733d7",
+            "auction_id": "65169eee25d90f9a92c12876",
+            "seller_email": "sthuthi@7edge.com",
+            "lot_number": 1,
+            "email_address": "aishwarya@7edge.com",
+            "price": 50000,
+            "fees": 44,
+            "type": "fixed",
+            "title1": "sthuthi lot 1"
+        }
+    ]
+}
+                                            </pre>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>403 - Forbidden
+                    <ul>
+                        <li>Content:
+                            <ul>
+                                <li>application/json:
+                                    <ul>
+                                        <li>Examples:
+                                            <ul>
+                                                <li>example1:
+                                                    <pre>
+{
+    "message": "You do not have access to perform this API action"
+}
+                                                    </pre>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>500 - Internal Server Error
+                    <ul>
+                        <li>Content:
+                            <ul>
+                                <li>application/json:
+                                    <ul>
+                                        <li>Examples:
+                                            <ul>
+                                                <li>example1:
+                                                    <pre>
+{
+    "message": "Internal server error"
+}
+                                                    </pre>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <h2>Components</h2>
+    <h3>Security Schemes</h3>
+    <ul>
+        <li>BearerAuth:
+            <ul>
+                <li>Type: apiKey</li>
+                <li>Name: Authorization</li>
+                <li>In: header</li>
+                <li>Description: Bearer Token</li>
+            </ul>
+        </li>
+    </ul>
+</body>
+</html>
